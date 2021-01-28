@@ -2,12 +2,7 @@
   "todos": [
     {
       "id": 1,
-      "title": "Formation Symfony",
-      "completed": true
-    },
-    {
-      "id": 2,
-      "title": "Formation ReactJs",
+      "title": "Formation Symfony  4",
       "completed": false
     },
     {

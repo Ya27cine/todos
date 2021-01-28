@@ -2,15 +2,17 @@
 
 <div class="container">
       <h1>List of Todos</h1>
-      <form class="block">
         <div class="form-group">
             <input v-model="title" class="form-control" type="text" name="" placeholder="New todo ..">
         </div>
-        <button @click="addTodo"  class="btn btn-block btn-success mb-2">Add Todo</button>
-      </form>
+        <button v-if="myTodo"  @click="updatTodo"  class="btn btn-block btn-danger mb-2">Update Todo</button>
+        <button v-else @click="addTodo"  class="btn btn-block btn-success mb-2">Add Todo</button>
+      
       <ul class="list-group" >
         <li class="list-group-item" v-bind:key="todo.id" v-for="todo in todos">
-           <Todo v-bind:todo="todo" @deleteTodo="delelteOneTodo"  @updateTodo="editTodo"/>    
+           <Todo v-bind:todo="todo"
+                   @deleteTodo="delelteOneTodo"  
+                   @updateTodo="editTodo"  />    
         </li>
       </ul>
 </div>
@@ -33,6 +35,23 @@ export default {
       }
     },
     methods: {
+        updatTodo(){
+          let todo = {
+              ...this.myTodo,
+              title: this.title,
+              completed: false
+          }
+           axios.put('http://localhost:3000/todos/'+todo.id, todo)
+                  .then((res) => {
+                       this.todos = this.todos.map( t => {
+                            if( res.data.id === t.id)
+                                return res.data;
+                            return t;
+                       });
+                       this.myTodo = null;
+                       this.title= '';
+                  });
+        },
         addTodo(e){
           e.preventDefault();
           if( this.title != ''){
@@ -50,6 +69,7 @@ export default {
            .catch(err => console.log(err))
         },
         delelteOneTodo(id){
+          console.log("hjfjhfg")
           axios.delete('http://localhost:3000/todos/'+id)
            .then(  () => this.todos =  this.todos.filter( i => i.id !== id )  )
            .catch(err => console.log(err))

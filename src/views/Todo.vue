@@ -8,7 +8,7 @@
            <div class="text-right">
             <button @click="updateMyTodo" class="btn btn-info btn-sm mr-1">
                Edit</button>
-            <button @click="deleteTodo"   class="btn btn-danger btn-sm">
+            <button @click="deletTodo"   class="btn btn-danger btn-sm">
                Delete</button>
            </div>
 </div>
@@ -19,8 +19,8 @@
 export default {
  props: ['todo'],
  methods: {
-    deleteTodo(id){
-       this.$emit('deleteTodo', id)
+    deletTodo(){
+       this.$emit('deleteTodo', this.todo.id)
     },
     updateMyTodo(){
        this.$emit('updateTodo', this.todo)
