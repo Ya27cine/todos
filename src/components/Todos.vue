@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Todo from "../views/Todo";
 export default {
     name: "Todos",
@@ -21,19 +22,18 @@ export default {
     },
     data(){
       return {
-        todos: [
-          {
-            id: 0,
-            title: "Learn NodeJs",
-            completed: false
-          },
-          {
-            id: 1,
-            title: "Learn Spring boot",
-            completed: true
-          }
-        ]
+        todos: [ ]
       }
+    },
+    methods: {
+        getTodos(){
+           axios.get("http://localhost:3000/todos")
+           .then(res => this.todos = res.data)
+           .catch(err => console.log(err))
+        }
+    },
+    created(){
+      this.getTodos();
     }
 }
 </script>
