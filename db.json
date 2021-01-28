@@ -1,13 +1,3 @@
 {
-    "todos": [{
-            "id": 1,
-            "title": "Formation VueJS 2",
-            "completed": false
-        },
-        {
-            "id": 2,
-            "title": "Formation ReactJs",
-            "completed": true
-        }
-    ]
+  "todos": []
 }

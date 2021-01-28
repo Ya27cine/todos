@@ -4,7 +4,7 @@
       <h1>List of Todos</h1>
       <ul class="list-group" >
         <li class="list-group-item" v-bind:key="todo.id" v-for="todo in todos">
-           <Todo v-bind:todo="todo" />
+           <Todo v-bind:todo="todo" @deleteTodo="delelteOneTodo" />
             
         </li>
       </ul>
@@ -29,6 +29,11 @@ export default {
         getTodos(){
            axios.get("http://localhost:3000/todos")
            .then(res => this.todos = res.data)
+           .catch(err => console.log(err))
+        },
+        delelteOneTodo(id){
+          axios.delete('http://localhost:3000/todos/'+id)
+           .then(  () => this.todos =  this.todos.filter( i => i.id !== id )  )
            .catch(err => console.log(err))
         }
     },
