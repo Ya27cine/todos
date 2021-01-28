@@ -1,3 +1,19 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": 1,
+      "title": "Formation Symfony",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "title": "Formation ReactJs",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "title": "Formation Laravel",
+      "completed": true
+    }
+  ]
 }
