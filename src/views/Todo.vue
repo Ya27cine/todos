@@ -1,10 +1,13 @@
 <template>
 <div>
-        <h2 :class="{
-                     'is-completed': todo.completed
-                  }">
-                  {{ todo.title}}
-         </h2>
+               <div class="form-check">
+                  <input type="checkbox" class="form-check-input" v-model="todo.completed" @click="isOneCompleted">
+                  <label :class="{
+                                    'is-completed': todo.completed
+                                 }">
+                                 {{ todo.title}}
+                  </label>
+            </div>
            <div class="text-right">
             <button @click="updateMyTodo" class="btn btn-info btn-sm mr-1">
                Edit</button>
@@ -24,6 +27,10 @@ export default {
     },
     updateMyTodo(){
        this.$emit('updateTodo', this.todo)
+    },
+    isOneCompleted(){
+      // console.log(this.todo.id+" is : "+this.todo.completed)
+       this.$emit('isCompleted', this.todo)
     }
  }
 }

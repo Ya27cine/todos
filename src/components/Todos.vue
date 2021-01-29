@@ -12,7 +12,9 @@
         <li class="list-group-item" v-bind:key="todo.id" v-for="todo in todos">
            <Todo v-bind:todo="todo"
                    @deleteTodo="delelteOneTodo"  
-                   @updateTodo="editTodo"  />    
+                   @updateTodo="editTodo" 
+
+                   @isCompleted="checkTodo"  />    
         </li>
       </ul>
 </div>
@@ -35,6 +37,14 @@ export default {
       }
     },
     methods: {
+      checkTodo(cTodo){
+        let todo = {
+              ...cTodo,
+              completed: !cTodo.completed
+          }
+          axios.put('http://localhost:3000/todos/'+todo.id, todo)
+                  .then((res) => { console.log(res)});
+        },
         updatTodo(){
           let todo = {
               ...this.myTodo,
